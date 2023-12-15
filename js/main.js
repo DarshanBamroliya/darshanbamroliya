@@ -261,3 +261,40 @@
   });
 
 })()
+
+let data = []; 
+
+function getDataLocalStorage(){
+    const localData = JSON.parse(localStorage.getItem('data'));
+    data.length = 0;
+    data.push(...localData);
+    console.log("----"+data.name)
+}
+
+document.getElementById('myForm')
+addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    var loadingElement = document.querySelector('.loading');
+    var sentMessageElement = document.querySelector('.sent-message');
+    var errorMessageElement = document.querySelector('.error-message');
+    var emailInput = document.getElementById("email");
+    var emailValue = emailInput.value;
+
+    if (emailValue !== "") {
+        // Email is not empty, proceed to store data in local storage
+        localStorage.setItem('email', emailValue);
+        var x = localStorage.getItem("email");
+        console.log(x);
+
+        if (sentMessageElement && errorMessageElement) {
+            loadingElement.style.display = 'none';
+            sentMessageElement.style.display = 'block';
+        }
+
+      } else {
+        if (x === emailInput) {
+            errorMessageElement.style.display = 'block';
+        }
+    }
+});
